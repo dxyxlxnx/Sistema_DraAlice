@@ -1,0 +1,171 @@
+:root {
+  /* --- PALETA DE COLORES (LIGHT MODE) --- */
+  /* Colores de Marca Base proporcionados por el usuario */
+  --color-brand-main-blue: #4169e1;     /* Azul Rey Principal (Botones, Foco)[cite: 2] */
+  --color-brand-sky-blue: #a3cfff;      /* Azul Cielo Complementario (Fondos ligeros, highlights) */
+  --color-brand-deep-blue: #27408b;     /* Azul Marino Profundo Complementario (Títulos, contraste alto)[cite: 3] */
+
+  /* Colores Neutros y de UI para Light Mode[cite: 2] */
+    --color-neutral-white: #ffffff;
+    --color-neutral-off-white: #f8fafc;   /* Para fondos de cuerpo, sutil */
+    --color-neutral-light-gray: #e2e8f0;   /* Para bordes generales */
+    --color-neutral-medium-gray: #64748b;  /* Para texto secundario/cuerpo (menos duro que el negro) */
+    --color-neutral-dark-gray: #1a1e2e;   /* Para texto principal si es necesario, muy profundo */
+
+  /* --- MAPEO DE VARIABLES DE UI (LIGHT MODE) --- */
+    --theme-bg-body: var(--color-neutral-off-white);
+    --theme-bg-card: var(--color-neutral-white);
+  
+    --theme-text-primary: var(--color-brand-deep-blue);  /* Títulos y texto de alto contraste */
+    --theme-text-secondary: var(--color-neutral-medium-gray); /* Texto del cuerpo/párrafos */
+  
+    --theme-accent-main: var(--color-brand-main-blue);  /* Interactividad principal */
+    --theme-accent-sub: var(--color-brand-sky-blue);    /* Interactividad secundaria/highlights */
+  
+    --theme-border: var(--color-neutral-light-gray);
+  
+  /* --- TIPOGRAFÍA (Global) --- */
+    --font-stack-base: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; /* Profesional Sans-serif */
+    --font-stack-mono: ui-monospace, Consolas, monospace; /* Para datos si los hay */
+
+  /* Escala de Tamaños (Responsiva) */
+    --font-size-base: 16px;       /* Estándar de legibilidad */
+    --font-size-h1: 32px;
+    --font-size-h2: 24px;
+    --font-size-body: 16px;
+    --font-size-small: 14px;      /* Para etiquetas de inputs, etc. */
+
+  /* Pesos */
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+
+  /* --- OTROS (Globales) --- */
+    --border-radius-base: 8px; /* Un redondeado sutil y profesional para Inputs/Botones */
+    --shadow-base:
+        0 1px 3px 0 rgba(0, 0, 0, 0.1),
+        0 1px 2px 0 rgba(0, 0, 0, 0.06); /* Sombra sutil para tarjetas */
+
+  /* Configuración Inicial */
+    font: var(--font-size-body)/1.5 var(--font-stack-base);
+    letter-spacing: 0.1px;
+    color-scheme: light dark; /* Permite que el sistema elija */
+    color: var(--theme-text-secondary);
+    background: var(--theme-bg-body);
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+  /* Diseño Responsivo Básico en el Root */
+    @media (max-width: 1024px) {
+        --font-size-base: 15px; /* Reduce ligeramente la fuente base en pantallas menores */
+    }
+}
+
+/* ==========================================================================
+   --- MODO OSCURO AUTOMÁTICO (@media) ---
+   Basado en la preferencia del sistema operativo del usuario.
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+    :root {
+    /* Mapeo de Variables para Dark Mode (Invertimos la lógica) */
+        --theme-bg-body: #111111;              /* Muy oscuro, casi negro neutro */
+        --theme-bg-card: #181818;              /* Un poco más claro para tarjetas */
+    
+        --theme-text-primary: var(--color-brand-sky-blue);  /* Azul Cielo para títulos (brilla en oscuro)[cite: 1] */
+        --theme-text-secondary: #94a3b8;        /* Gris claro para cuerpo (reduce contraste agresivo) */
+    
+        --theme-border: #2e303a;               /* Borde oscuro sutil */
+    
+    /* Mantenemos el acento principal, pero a veces necesita sutil ajuste para contraste.
+       En este caso, `#4169e1` funciona bien sobre `#181818`. */
+        --theme-accent-main: var(--color-brand-main-blue); 
+        --theme-accent-sub: #1e3a8a;           /* Un azul marino profundo para fondos de secciones oscuras */
+    
+    /* Sombras para Dark Mode (más pesadas) */
+        --shadow-base:
+            0 10px 15px -3px rgba(0, 0, 0, 0.3),
+            0 4px 6px -2px rgba(0, 0, 0, 0.15);
+    }
+}
+
+/* --- ESTILOS DE ELEMENTOS BÁSICOS (Usando las variables) --- */
+
+body {
+    margin: 0;
+}
+
+#root {
+    width: 1126px; /* Mantenemos el ancho máximo del ejemplo principal */
+    max-width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    border-inline: 1px solid var(--theme-border);
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+h1,
+h2 {
+    font-family: var(--font-stack-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--theme-text-primary); /* Azul Marino Profundo en Light / Azul Cielo en Dark */
+    margin: 0;
+}
+
+h1 {
+    font-size: var(--font-size-h1);
+    margin: 32px 0 16px;
+    @media (max-width: 1024px) {
+        font-size: 28px;
+    }
+}
+
+h2 {
+    font-size: var(--font-size-h2);
+    margin-bottom: 8px;
+    @media (max-width: 1024px) {
+        font-size: 22px;
+    }
+}
+
+p {
+    margin: 0 0 16px;
+    color: var(--theme-text-secondary); /* Gris Medio en Light / Gris Claro en Dark */
+}
+
+/* Ejemplo básico de un botón usando la paleta */
+/*button {
+    background-color: var(--theme-accent-main); /* Azul Rey[cite: 1] 
+    color: var(--color-neutral-white);
+    border: none;
+    border-radius: var(--border-radius-base);
+    padding: 10px 20px;
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: background-color 0.2s;
+  
+    &:hover {
+    background-color: var(--color-brand-deep-blue); /* Se oscurece ligeramente al pasar el mouse 
+    }
+}
+
+/* Ejemplo básico de un input usando la paleta 
+input {
+    border: 1px solid var(--theme-border);
+    border-radius: var(--border-radius-base);
+    padding: 10px;
+    font-size: var(--font-size-body);
+    background: var(--theme-bg-card); /* Blanco en Light / Gris Muy Oscuro en Dark 
+    color: var(--theme-text-secondary);
+
+    &:focus {
+        border-color: var(--theme-accent-main); /* Foco en Azul Rey[cite: 1] 
+        outline: none;
+        box-shadow: 0 0 0 2px var(--color-brand-sky-blue); /* Brillo sutil en Azul Cielo[cite: 1] 
+    }
+}*/
