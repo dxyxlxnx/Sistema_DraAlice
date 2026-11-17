@@ -1,10 +1,11 @@
 import { useState} from "react";
 import '../styles/button.css'
 
-function Button({text, variant = "primary"}){
+function Button({text, variant = "primary", eventClick}){
 
     return(
-        <button className={variant}>{text}</button>
+        <button onClick={eventClick} className={`btn ${variant}`}>{text}</button>
+
     )
 }
 

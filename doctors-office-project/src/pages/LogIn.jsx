@@ -5,7 +5,7 @@ import Logo from '../assets/Dra_Alice.png';
 import '../styles/LogIn.css'
 
 function LogIn(){
-    const[isLogin, setIsLogin] = useState(true);
+    const[pantallaActiva, setPantallaActiva] = useState('Login');
 
     return(
         <div className="SignUp-container">
@@ -14,9 +14,8 @@ function LogIn(){
             <div className="text-container">
                 <InputText title="Username" placeholder="Enter your username" />
                 <InputText title="Password" type="password" placeholder="Enter your password" />
-                <Button id="btn-login" text="Log in" />
-                <Button text="Sign Up" />
-                <Button text="Sign In" />
+                <Button text="Log in" className=".primary"/>
+                <Button text="Sign In" onClick="setPantanllaActiva(" className=".primary" />
             </div>
         </div>
     )
